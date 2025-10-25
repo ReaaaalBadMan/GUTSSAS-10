@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-## returns a dict of event titles and hrefs
-
 ##TODO:Allow users to update the URL to scrape different pages if needed 
 
 def fetch_page(url):
@@ -23,7 +21,7 @@ def find_reviews(url, title_tag=None):
     soup = fetch_page(url)
     all_links = soup.find_all("a")
 
-    data = []
+    pub_list = []
     current_title = None
     current_cats = []
 
@@ -34,7 +32,7 @@ def find_reviews(url, title_tag=None):
         if "link-white-to-secondary-20" in classes:
             # Save previous title + categories
             if current_title:
-                data.append([current_title, current_cats])
+                pub_list.append([current_title, current_cats])
             current_title = link.get_text(strip=True)
             current_cats = []
         
@@ -44,9 +42,29 @@ def find_reviews(url, title_tag=None):
     
     # Add last title
     if current_title:
-        data.append([current_title, current_cats])
-    
-    return data
+        pub_list.append([current_title, current_cats])
+    return pub_list
+
+def find_moods(results):
+    pub_list = []
+    for result in results:
+        title = result[0]
+        categories = result[1]
+        for cat in categories:
+            if 'Club' in cat or 'Bar' in cat:
+                mood = 'party'
+                break
+            elif "Pub" in cat:
+                mood = 'casual'
+                break
+        pub_list.append({"name": title, "mood": mood})
+    return pub_list
+
+def add_cat(pub_list,cat_list, cat_name):
+    for i in range(len(pub_list)):
+        pub_list[i][cat_name] = cat_list[i]
+    return pub_list
+
 
 
 def event_scrape_website(url):
@@ -67,15 +85,21 @@ def pub_scrape_website(url):
         print(f"Error fetching the URL: {e}") 
         return
 
-if __name__ == "__main__":
-    #temporary variable to decide what type of scraping to do
-    event = False
-    pub = True
-    event_url = "https://secretglasgow.com/things-to-do-october-glasgow/"
+def pub_scrape_website(url):
     pub_url = "https://www.designmynight.com/glasgow/bars/cool-and-quirky-bars-in-glasgow"
+    prices = [ '££', '£', '£££', '£', '££', '£££', '£', '££', '£££', '£', '££', '£', '££', '££', '£', '££', '££', '£', '£', '££', '£', '£', '££', '£', '£', '£', '£', '£', '£']
+    min_people = [4, 2, 5, 3, 4, 6, 2, 3, 4, 5, 3, 4, 2, 3, 4, 5, 2, 4, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4]
+    max_people = [10, 8, 12, 7, 10, 15, 6, 8, 12, 10, 7, 10, 5, 8, 10, 12, 6, 10, 7, 10, 5, 8, 10, 6, 8, 12, 6, 8, 10]
 
-    if event == True:
-        events = event_scrape_website(event_url)
-    if pub == True:
-        events = pub_scrape_website(pub_url)
-        print(events[1])
+    events = pub_scrape_website(pub_url)
+    pub_list = find_moods(events)
+    pub_list = add_cat(pub_list, prices, "price")
+    pub_list = add_cat(pub_list, min_people, "min")
+    pub_list = add_cat(pub_list, max_people, "max")
+    
+    return pub_list
+
+def event_scrape_website(url):
+    event_url = "https://secretglasgow.com/things-to-do-october-glasgow/"
+    events = event_scrape_website(event_url)
+    return events
