@@ -11,7 +11,7 @@ def mood_match(mood, tags):
     else:
         return 0.0  # not matching at all
 
-
+# ToDo: Change price from ints to (£, ££, £££) etc.
 #budget matching
 def budget_fit(averagePricePP, budget):
     if budget is None:
