@@ -11,13 +11,12 @@ def mood_match(mood, tags):
     else:
         return 0.0  # not matching at all
 
-# ToDo: Change price from ints to (£, ££, £££) etc.
+
 #budget matching
 def budget_fit(averagePricePP, budget):
     if budget is None:
         return 1.0  # no budget given, assume ok
-    averagepricePP = int(averagePricePP)
-    budget = int(budget)
+
     if averagePricePP <= budget:
         return 1.0
     elif averagePricePP <= budget * 1.2:  # up to 20% over budget still ok
@@ -28,7 +27,6 @@ def budget_fit(averagePricePP, budget):
 
 #group size matching
 def group_fit(groupSize, minGroupSize, maxGroupSize):
-    groupSize = int(groupSize)
     if groupSize < minGroupSize:
         # Too small
         return groupSize / minGroupSize
