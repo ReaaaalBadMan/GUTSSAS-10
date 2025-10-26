@@ -55,6 +55,9 @@ def con_click():
         recommendations = recommend(mood.lower(), budget, group_size)
         print ("Recommendations", recommendations)
 
+        rec_label.config(text="Top Recommendations:\n" + "\n".join([f"{rec['name']} (~£{rec['price_per_person']}pp)" for rec in recommendations]), fg="black")
+
+
 surprise_button = tk.Button(root, text="Surprise Me!", command = surp_click, font = ("Helvetica", 16))
 surprise_button.pack(pady=20)
 
