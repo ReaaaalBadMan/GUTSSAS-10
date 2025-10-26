@@ -20,19 +20,18 @@ def surp_click():
     events = get_event_scrape()
     print(events)
 
-    if events: 
         
-        event_list = list(events.items())
+    event_list = list(events.items())
         
-        random_event = random.choice(event_list)
+    random_event = random.choice(event_list)
 
-        event_name = random_event[0]
-        event_url = random_event[1]
+    event_name = random_event[0]
+    event_url = random_event[1]
 
-        print(f"Surprise Event Selected: {event_name} - {event_url}")
+    print(f"Surprise Event Selected: {event_name} - {event_url}")
 
-        surprise_label.config(text=f"How about: {event_name}?", fg="black")
-        webbrowser.open_new_tab(event_url)
+    surprise_label.config(text=f"How about: {event_name}?", fg="black")
+    webbrowser.open_new_tab(event_url)
 
 def con_click():
     mood = opt1.get()
@@ -105,8 +104,6 @@ confirm_button = tk.Button(buttonframe, text="Confirm", command = con_click, fon
 confirm_button.grid(row=0, column = 1)
 
 buttonframe.pack(fill="x", padx=20, pady=20)
-
-
 
 surprise_label = tk.Label(root, text="", font=("Helvetica", 12))
 surprise_label.pack(pady=10)
