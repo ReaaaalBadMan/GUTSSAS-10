@@ -48,17 +48,17 @@ def con_click():
     else:
         confirmation_label.config(text=f"Your night out plan: Mood - {mood}, Group Size - {group_size}, Budget - £{budget}", fg="green")
 
-        print(f"Mood: {mood}")
+        print(f"Mood: {mood.lower()}")
         print(f"Group Size: {group_size}")
         print(f"Budget: £{budget}")
 
-        recommendations = recommend(mood, budget, group_size)
-    print ("Recommendations", recommendations)
+        recommendations = recommend(mood.lower(), budget, group_size)
+        print ("Recommendations", recommendations)
 
 surprise_button = tk.Button(root, text="Surprise Me!", command = surp_click, font = ("Helvetica", 16))
 surprise_button.pack(pady=20)
 
-Mood_options = ["Happy", "Adventurous", "Underground", "Chill"]
+Mood_options = ["Casual", "Party", "Chill", "Competitive", "Teamwork", "Foodie", "Social", "Fun"]
 
 
 optionframe = tk.Frame(root)
@@ -103,5 +103,8 @@ confirmation_label.pack(pady=10)
 
 surprise_label = tk.Label(root, text="", font=("Helvetica", 12))
 surprise_label.pack(pady=10)
+
+rec_label = tk.Label(root, text="", font=("Helvetica", 12))
+rec_label.pack(pady=10)
 
 root.mainloop()
