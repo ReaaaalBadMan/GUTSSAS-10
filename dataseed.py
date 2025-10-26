@@ -1,5 +1,5 @@
-#TODO: Remove this when ready 
-def load_activities():
+
+def get_pub_scrape():
     return [
         {"name": "Bowling at the Quay",  "moods": ["competitive", "social"], "price": 15, "min": 2, "max": 20},
         {"name": "Karaoke Night",  "moods": ["party", "social"], "price": 18, "min": 4, "max": 10},
