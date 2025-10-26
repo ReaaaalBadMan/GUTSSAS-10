@@ -1,4 +1,4 @@
-
+#TODO: Remove this when ready 
 def load_activities():
     return [
         {"name": "Bowling at the Quay",  "moods": ["competitive", "social"], "price": 15, "min": 2, "max": 20},

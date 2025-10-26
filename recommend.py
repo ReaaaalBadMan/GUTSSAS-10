@@ -37,6 +37,7 @@ def score_activity(user_mood, user_budget, user_group_size, activity):
 
 def recommend(mood, budget, groupSize, top_n=3, allowedCategories=None):
    
+    # ToDO: Change this to be get_pub() from scaper.py
     activities = load_activities()
 
     # optional category filter
