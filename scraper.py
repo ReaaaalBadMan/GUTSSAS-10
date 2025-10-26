@@ -58,7 +58,7 @@ def find_moods(results):
             elif "Pub" in cat:
                 mood = 'casual'
                 break
-        pub_list.append({"name": title, "mood": mood})
+        pub_list.append({"name": title, "moods": mood})
     return pub_list
 
 def add_cat(pub_list,cat_list, cat_name):

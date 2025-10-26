@@ -55,11 +55,8 @@ def con_click():
         recommendations = recommend(mood.lower(), budget, group_size)
         print ("Recommendations", recommendations)
 
-        rec_label.config(text="Top Recommendations:\n" + "\n".join([f"{rec['name']} (~£{rec['price_per_person']}pp)" for rec in recommendations]), fg="black")
+        rec_label.config(text="Top Recommendations:\n" + "\n".join([f"{rec['name']} (~£{rec['price_per_person']}pp) ({rec['reasons'][0]})" for rec in recommendations]), fg="black")
 
-
-surprise_button = tk.Button(root, text="Surprise Me!", command = surp_click, font = ("Helvetica", 16))
-surprise_button.pack(pady=20)
 
 Mood_options = ["Casual", "Party", "Chill", "Competitive", "Teamwork", "Foodie", "Social", "Fun"]
 
@@ -72,8 +69,14 @@ optionframe.columnconfigure(2, weight=2, minsize=100)
 optionframe.columnconfigure(3, weight=1, minsize=100)
 optionframe.columnconfigure(4, weight=2, minsize=100)
 
-optionframe.pack(fill="x", padx=20, pady=20) 
+optionframe.pack(fill="x", padx=20, pady=40) 
 
+buttonframe = tk.Frame(root)
+buttonframe.columnconfigure(0, weight=1)
+buttonframe.columnconfigure(1, weight=1)
+
+surprise_button = tk.Button(buttonframe, text="Surprise Me! (monthly events)", command = surp_click, font = ("Helvetica", 16))
+surprise_button.grid(row=0, column=0)
 
 opt1 = StringVar(optionframe)
 opt1.set("Mood")
@@ -82,24 +85,26 @@ dropdown1.config(font=("Helvetica", 14), width=12)
 dropdown1.grid(row=0, column=0, padx=2, pady=10)
 
 
-gs_label = tk.Label(optionframe, text="Group size", font=("Helvetica", 14))
+gs_label = tk.Label(optionframe, text="Group size", font=("Helvetica", 12))
 gs_label.grid(row=0, column=1, padx=2, sticky="e") 
 
 
-groupsize_entry = tk.Entry(optionframe, font=("Helvetica", 14), justify="center")
+groupsize_entry = tk.Entry(optionframe, font=("Helvetica", 14))
 groupsize_entry.grid(row=0, column=2, sticky="ew", padx=5)
 groupsize_entry.insert(0,"")
 
 
-budget_label = tk.Label(optionframe, text="Budget(£)", font=("Helvetica", 14))
-budget_label.grid(row=0, column=3, padx=5, sticky="w") 
+budget_label = tk.Label(optionframe, text="Budget PP(£)", font=("Helvetica", 12))
+budget_label.grid(row=0, column=3, padx=2, sticky="w") 
 
 budget_entry = tk.Entry(optionframe, font=("Helvetica", 14), justify="center")
 budget_entry.grid(row=0, column=4, sticky="ew", padx=5)
 budget_entry.insert(0, "")
 
-confirm_button = tk.Button(root, text="Confirm", command = con_click, font=("Helvetica", 16))
-confirm_button.pack(pady=20)
+confirm_button = tk.Button(buttonframe, text="Confirm", command = con_click, font=("Helvetica", 16))
+confirm_button.grid(row=0, column = 1)
+
+buttonframe.pack(fill="x", padx=20, pady=20)
 
 confirmation_label = tk.Label(root, text="", font=("Helvetica", 14))
 confirmation_label.pack(pady=10)
