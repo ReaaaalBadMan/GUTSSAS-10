@@ -18,21 +18,18 @@ label.pack(padx=20, pady=20)
 
 def surp_click():
     events = get_event_scrape()
-    print(events)
-
-    if events: 
         
-        event_list = list(events.items())
+    event_list = list(events.items())
         
-        random_event = random.choice(event_list)
+    random_event = random.choice(event_list)
 
-        event_name = random_event[0]
-        event_url = random_event[1]
+    event_name = random_event[0]
+    event_url = random_event[1]
 
-        print(f"Surprise Event Selected: {event_name} - {event_url}")
+    print(f"Surprise Event Selected: {event_name} - {event_url}")
 
-        surprise_label.config(text=f"How about: {event_name}?", fg="black")
-        webbrowser.open_new_tab(event_url)
+    surprise_label.config(text=f"How about: {event_name}?", fg="black")
+    webbrowser.open_new_tab(event_url)
 
 def con_click():
     mood = opt1.get()
@@ -101,13 +98,13 @@ budget_entry.insert(0, "")
 confirm_button = tk.Button(root, text="Confirm", command = con_click, font=("Helvetica", 16))
 confirm_button.pack(pady=20)
 
-confirmation_label = tk.Label(root, text="", font=("Helvetica", 14))
+rec_label = tk.Label(root, text="", font=("Helvetica", 12))
+rec_label.pack(pady=10)
+
+confirmation_label = tk.Label(root, text="", font=("Helvetica", 8))
 confirmation_label.pack(pady=10)
 
 surprise_label = tk.Label(root, text="", font=("Helvetica", 12))
 surprise_label.pack(pady=10)
-
-rec_label = tk.Label(root, text="", font=("Helvetica", 12))
-rec_label.pack(pady=10)
 
 root.mainloop()
