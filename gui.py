@@ -1,6 +1,9 @@
 
 import tkinter as tk
 from tkinter import *
+from scraper import get_event_scrape
+import random
+import webbrowser
 
 root = tk.Tk()
 
@@ -13,7 +16,22 @@ label.pack(padx=20, pady=20)
 
 
 def surp_click():
-    print("Surprise!")
+    events = get_event_scrape()
+    print(events)
+
+    if events: 
+        
+        event_list = list(events.items())
+        
+        random_event = random.choice(event_list)
+
+        event_name = random_event[0]
+        event_url = random_event[1]
+
+        print(f"Surprise Event Selected: {event_name} - {event_url}")
+
+        surprise_label.config(text=f"How about: {event_name}?", fg="black")
+        webbrowser.open_new_tab(event_url)
 
 def con_click():
     mood = opt1.get()
@@ -79,5 +97,8 @@ confirm_button.pack(pady=20)
 
 confirmation_label = tk.Label(root, text="", font=("Helvetica", 14))
 confirmation_label.pack(pady=10)
+
+surprise_label = tk.Label(root, text="", font=("Helvetica", 12))
+surprise_label.pack(pady=10)
 
 root.mainloop()

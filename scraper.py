@@ -85,7 +85,7 @@ def pub_scrape_website(url):
         print(f"Error fetching the URL: {e}") 
         return
 
-def pub_scrape_website():
+def get_pub_scrape():
     pub_url = "https://www.designmynight.com/glasgow/bars/cool-and-quirky-bars-in-glasgow"
     prices = [ '££', '£', '£££', '£', '££', '£££', '£', '££', '£££', '£', '££', '£', '££', '££', '£', '££', '££', '£', '£', '££', '£', '£', '££', '£', '£', '£', '£', '£', '£']
     min_people = [4, 2, 5, 3, 4, 6, 2, 3, 4, 5, 3, 4, 2, 3, 4, 5, 2, 4, 3, 4, 2, 3, 4, 2, 3, 4, 2, 3, 4]
@@ -99,7 +99,7 @@ def pub_scrape_website():
     
     return pub_list
 
-def event_scrape_website():
+def get_event_scrape():
     event_url = "https://secretglasgow.com/things-to-do-october-glasgow/"
     events = event_scrape_website(event_url)
     return events
