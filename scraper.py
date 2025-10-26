@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 ##TODO:Allow users to update the URL to scrape different pages if needed 
 
@@ -12,7 +13,7 @@ def fetch_page(url):
 def find_titles_and_hrefs(url, title_tag):
         soup = fetch_page(url)
         titles_raw = soup.find_all(title_tag)
-        titles = [title.get_text(strip=True) for title in titles_raw]
+        titles = [re.sub(r'^\d+\.\s*', '', t.get_text(strip=True)) for t in soup.find_all(title_tag)]
         hrefs = [title.find('a')['href'] for title in titles_raw if title.find('a')] 
         events = dict(zip(titles, hrefs))
         return events
