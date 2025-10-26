@@ -55,7 +55,7 @@ def con_click():
         recommendations = recommend(mood.lower(), budget, group_size)
         print ("Recommendations", recommendations)
 
-        rec_label.config(text="Top Recommendations:\n" + "\n".join([f"{rec['name']} (~£{rec['price_per_person']}pp) ({rec['reasons'][0]})" for rec in recommendations]), fg="black")
+        rec_label.config(text="Top Recommendations:\n" + "\n".join([f"{rec['name']} (~£{rec['price_per_person']}pp)" for rec in recommendations]), fg="black")
 
 
 Mood_options = ["Casual", "Party", "Chill", "Competitive", "Teamwork", "Foodie", "Social", "Fun"]
@@ -89,7 +89,7 @@ gs_label = tk.Label(optionframe, text="Group size", font=("Helvetica", 12))
 gs_label.grid(row=0, column=1, padx=2, sticky="e") 
 
 
-groupsize_entry = tk.Entry(optionframe, font=("Helvetica", 14))
+groupsize_entry = tk.Entry(optionframe, font=("Helvetica", 14), justify="center")
 groupsize_entry.grid(row=0, column=2, sticky="ew", padx=5)
 groupsize_entry.insert(0,"")
 
@@ -106,13 +106,15 @@ confirm_button.grid(row=0, column = 1)
 
 buttonframe.pack(fill="x", padx=20, pady=20)
 
-confirmation_label = tk.Label(root, text="", font=("Helvetica", 14))
-confirmation_label.pack(pady=10)
+
 
 surprise_label = tk.Label(root, text="", font=("Helvetica", 12))
 surprise_label.pack(pady=10)
 
 rec_label = tk.Label(root, text="", font=("Helvetica", 12))
 rec_label.pack(pady=10)
+
+confirmation_label = tk.Label(root, text="", font=("Helvetica", 8))
+confirmation_label.pack(pady=10)
 
 root.mainloop()
