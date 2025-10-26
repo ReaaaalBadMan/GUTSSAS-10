@@ -4,6 +4,7 @@ from tkinter import *
 from scraper import get_event_scrape
 import random
 import webbrowser
+from recommend import recommend
 
 root = tk.Tk()
 
@@ -51,6 +52,8 @@ def con_click():
         print(f"Group Size: {group_size}")
         print(f"Budget: £{budget}")
 
+        recommendations = recommend(mood, budget, group_size)
+    print ("Recommendations", recommendations)
 
 surprise_button = tk.Button(root, text="Surprise Me!", command = surp_click, font = ("Helvetica", 16))
 surprise_button.pack(pady=20)
